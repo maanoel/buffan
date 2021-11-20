@@ -1,12 +1,14 @@
 #BlueJ class context
-comment0.params=nome\ p\ contador
-comment0.target=Peidin(java.lang.String,\ Mapa,\ Contador)
-comment1.params=
-comment1.target=void\ parado()
+comment0.target=Peidin
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Buffan\ here.\r\n\ \r\n\ @author\ (Equipe\ mais\ linda\ da\ cidade)\ \r\n\ @version\ (1.1)\r\n
+comment1.params=nome\ p\ contador
+comment1.target=Peidin(java.lang.String,\ Mapa,\ Contador)
 comment2.params=
-comment2.target=void\ act()
+comment2.target=void\ parado()
 comment3.params=
-comment3.target=java.lang.String\ toString()
+comment3.target=void\ act()
 comment4.params=
-comment4.target=void\ mover()
-numComments=5
+comment4.target=java.lang.String\ toString()
+comment5.params=
+comment5.target=void\ mover()
+numComments=6

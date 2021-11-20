@@ -1,4 +1,13 @@
-import greenfoot.*; 
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Buffan here.
+ * 
+ * @author (Equipe mais linda da cidade) 
+ * @version (1.1)
+ */
+
+
 
 public class Buffan extends Personagens
 {
@@ -6,6 +15,7 @@ public class Buffan extends Personagens
         super(nome, p, contador);
     }
 
+    //Método implementado que define como este personagem vai ficar parado
     public void parado(){
         if(key== "down"){
             setImage(nomePersonagem +"_03.png"); 
@@ -21,7 +31,8 @@ public class Buffan extends Personagens
     {
         mover();
         encontrouBonus();
-        if(Greenfoot.isKeyDown("space") ){ 
+        //Se a key for shift, faz o personagem cagar.
+        if(Greenfoot.isKeyDown("shift") ){ 
             if(estaNaHora()){
                 cagar();
             }
@@ -32,42 +43,42 @@ public class Buffan extends Personagens
             total = finish - start;
         } 
 
-        //Se total for 2000 passou 2 segundos á hora de soltar a bomba
-        if(total >= 2000){
+        //Se total for 3000 passou 3 segundos á hora de soltar a bomba
+        if(total >= 3000){
             ativo = false;
-            Bomba.explodir();
-            Bomba.explodir(Bomba);
+            bosta.explodir();
+            bosta.explodir(bosta);
             total = 0;
         }
 
         //Verifica se o personagem ainda está vivo
         if(morreu()){  
-            trocarImagem();
+            morrer();
         }
-
         currentTime();
     }  
 
     public void mover()
     {            
-        if(Greenfoot.isKeyDown("w")) 
+        if(Greenfoot.isKeyDown("up")) 
         {
             mover(1);
-        }else if(Greenfoot.isKeyDown("s")) 
+        }else if(Greenfoot.isKeyDown("down")) 
         {
             mover(2);
-        }else if(Greenfoot.isKeyDown("d")) 
+        }else if(Greenfoot.isKeyDown("right")) 
         {
             mover(3);        
-        }else if(Greenfoot.isKeyDown("a")) 
+        }else if(Greenfoot.isKeyDown("left")) 
         {
             mover(4);        
-        }else if(Greenfoot.isKeyDown("p"))
-        {
+        }else{
             mover(5);
-        } else {
-            mover(6);
         }
 
+    }
+
+    public String toString(){
+        return this.nomePersonagem;
     }
 }

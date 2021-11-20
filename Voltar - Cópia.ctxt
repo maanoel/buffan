@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=m
-comment0.target=VoltarPause(Mapa)
+comment0.params=botaoStart
+comment0.target=Voltar(BotaoStart)
 comment1.params=
 comment1.target=void\ act()
 numComments=2

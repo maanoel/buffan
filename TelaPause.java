@@ -1,18 +1,33 @@
-import greenfoot.*; 
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class TelaPause here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
 public class TelaPause extends World
 {    
-    private Mapa m;
-    public TelaPause(Mapa m)
+    BotaoStart botaoStart;
+    
+    /**
+     * Constructor for objects of class TelaPause.
+     * 
+     */
+    public TelaPause()
     {    
-        super(450, 450, 1);  
-        this.m = m;
+        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        super(450, 450, 1); 
         prepare();
     }
 
     public void prepare()
     {
-        VoltarPause voltar = new VoltarPause(m);
-        addObject(voltar, 235, 278); 
+        BotaoPause pause = new BotaoPause();
+        addObject(pause, 200,150);
+
+        Voltar voltar = new Voltar(botaoStart);
+        addObject(voltar, 201, 303); 
     }
 
 }

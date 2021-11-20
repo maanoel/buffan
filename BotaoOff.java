@@ -1,17 +1,29 @@
-import greenfoot.*;  
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+/**
+ * Write a description of class BotaoOff here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
 public class BotaoOff extends Navegador
 {
-    private BotaoOn botaoOn;
-    private BotaoStart botaoStart;
+    BotaoOn botaoOn;
+    BotaoStart botaoStart;
     
     public BotaoOff(BotaoStart botaoStart){
         this.botaoStart = botaoStart;
     }
-
+    
+    public BotaoOff(boolean b){
+    
+     
+    }
+    
     public void act() 
     {
        if(Greenfoot.mouseClicked(this)){
+        
          botaoStart.setLigada(false);   
          this.setImage("btt_off.png");
          botaoStart.getSom().setVolume(0);

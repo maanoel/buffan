@@ -1,11 +1,18 @@
-import greenfoot.*;
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class TelaInfo here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
 public class TelaInfo extends World
 {
 
-    private BotaoStart botaoStart;
+    BotaoStart botaoStart;
     public TelaInfo(BotaoStart botaoStart)
     {    
-        super(450,450,1); 
+        super(420,400,1); 
         this.botaoStart = botaoStart;
         prepare();
         
@@ -16,14 +23,14 @@ public class TelaInfo extends World
         Regras regras = new Regras();
         Sobre sobre = new Sobre();
         
-        addObject(comandos, 130, 132);
-        addObject(regras, 225, 132);
-        addObject(sobre, 320, 132);
+        addObject(comandos, 105, 97);
+        addObject(regras, 201, 97);
+        addObject(sobre, 296, 97);
         
         ComandosInfo comandoInfo = new ComandosInfo();
-        addObject(comandoInfo, 228, 235);
+        addObject(comandoInfo, 203, 201);
         
         Voltar voltar = new Voltar(botaoStart);
-        addObject(voltar, 225, 341); 
+        addObject(voltar, 201, 303); 
     }
 }

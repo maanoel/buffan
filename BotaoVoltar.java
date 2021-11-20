@@ -1,9 +1,19 @@
-import greenfoot.*;  
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+/**
+ * Write a description of class BotaoVoltar here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
 public class BotaoVoltar extends Navegador
 {
+    
+ 
+  
     public void act() 
     {
+        // Add your action code here.
         if (Greenfoot.mouseClicked(this))
         {
             Greenfoot.setWorld(new TelaInicial());            

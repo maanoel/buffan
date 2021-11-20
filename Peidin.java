@@ -1,13 +1,17 @@
-import greenfoot.*; 
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+/**
+ * Write a description of class Buffan here.
+ * 
+ * @author (Equipe mais linda da cidade) 
+ * @version (1.1)
+ */
 public class Peidin extends Personagens
 {
-
     public Peidin(String nome, Mapa p, Contador contador){
         super(nome, p, contador);
     }
 
-    
     //Método implementado que define como este personagem vai ficar parado
     public void parado(){
         if(key== "s"){
@@ -22,10 +26,10 @@ public class Peidin extends Personagens
 
     public void act() 
     {
-        mover();
-        encontrouBonus();
+       mover();
+       encontrouBonus();
         //Se a key for space, faz o personagem cagar.
-        if(Greenfoot.isKeyDown("shift")){ 
+        if(Greenfoot.isKeyDown("space")){ 
             if(estaNaHora()){
                 cagar();
             }
@@ -36,17 +40,17 @@ public class Peidin extends Personagens
             total = finish - start;
         } 
 
-        //Se total for 2000 passou 2 segundos á hora de soltar a bomba
-        if(total >= 2000){
+        //Se total for 3000 passou 3 segundos á hora de soltar a bomba
+        if(total >= 3000){
             ativo = false;
-            Bomba.explodir();
-            Bomba.explodir(Bomba);
+            bosta.explodir();
+            bosta.explodir(bosta);
             total = 0;
         }
 
         //Verifica se o personagem ainda está vivo
         if(morreu()){  
-            trocarImagem();
+            morrer();
         }
         currentTime();
 
@@ -58,24 +62,20 @@ public class Peidin extends Personagens
 
     public void mover()
     {            
-
-        if(Greenfoot.isKeyDown("up")) 
+        if(Greenfoot.isKeyDown("w")) 
         {
             mover(1);
-        }else if(Greenfoot.isKeyDown("down")) 
+        }else if(Greenfoot.isKeyDown("s")) 
         {
             mover(2);
-        }else if(Greenfoot.isKeyDown("right")) 
+        }else if(Greenfoot.isKeyDown("d")) 
         {
             mover(3);        
-        }else if(Greenfoot.isKeyDown("left")) 
+        }else if(Greenfoot.isKeyDown("a")) 
         {
             mover(4);        
-        }else if(Greenfoot.isKeyDown("p"))
-        {
+        }else{
             mover(5);
-        } else {
-            mover(6);
         }
 
     }

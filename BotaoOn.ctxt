@@ -1,8 +1,10 @@
 #BlueJ class context
-comment0.params=botaoStart
-comment0.target=BotaoOn(BotaoStart)
-comment1.params=
-comment1.target=void\ act()
-comment2.params=btOff
-comment2.target=void\ setBtOff(BotaoOff)
-numComments=3
+comment0.target=BotaoOn
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ BotaoOn\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=botaoStart
+comment1.target=BotaoOn(BotaoStart)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=btOff
+comment3.target=void\ setBtOff(BotaoOff)
+numComments=4

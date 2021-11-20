@@ -1,4 +1,4 @@
-import greenfoot.*; 
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class botao_start here.
@@ -8,14 +8,13 @@ import greenfoot.*;
  */
 public class BotaoStart extends Navegador
 {
-    private GreenfootSound som; 
+    GreenfootSound som; 
     private boolean ligada = true;
     private boolean off = true;
     private boolean somOn;
     
     public BotaoStart(){
-        this.som = new GreenfootSound("tela-inicial.mp3");        
-        this.som.setVolume(100);
+        this.som = new GreenfootSound("tela-inicial.mp3");
         this.somOn= true;
     }
     

@@ -8,34 +8,39 @@ import java.util.*;
  */
 public class Mapa extends World
 {
-    private int x, y;
+    int x, y;
     private static final int altura = 450; 
     private static final int largura = 450;
     private GreenfootSound som;
     private boolean ligado;
-    private Contador contador = new Contador(this);
-    private Personagens buffan = new Buffan("buffan", this, contador); 
-    private Personagens peidin = new Peidin("peidin", this, contador);
-    private List <BuffanVida> buffanVidas;
-    private List <PeidinVida> peidinVidas;
-    private int valorBuffan = 3;
-    private int valorPeidin = 3;
-    private Bonus vida = new Vida();
+    
+     //Contador
+    Contador contador = new Contador(this);
+    
+    Personagens buffan = new Buffan("buffan", this, contador); 
+    Personagens peidin = new Peidin("peidin", this, contador);
+
+    BuffanVida buffanVida1 = new BuffanVida();
+    BuffanVida buffanVida2 = new BuffanVida();
+    BuffanVida buffanVida3 = new BuffanVida();
+    BuffanVida buffanVida4 = new BuffanVida();
+
+    PeidinVida peidinVida1 = new PeidinVida();
+    PeidinVida peidinVida2 = new PeidinVida();
+    PeidinVida peidinVida3 = new PeidinVida();
+    PeidinVida peidinVida4 = new PeidinVida();
+
+    //Valor das Vidas
+    int valorBuffan = 3;
+    int valorPeidin = 3;
     
     public Mapa(boolean ligado){    
+        //Define o tamanho do mapa distância e altura em pixels. (760px  de altura, por 700 de largura) 
         super(largura,altura,1); 
         this.ligado = ligado;
         ligarSom();
         prepare();
-    }
 
-    public Mapa(boolean ligado, int numPeidinVidas, int numBuffanVidas){
-        super(largura,altura,1);
-        this.ligado = ligado;
-        valorPeidin = numPeidinVidas;
-        valorBuffan = numBuffanVidas;
-        ligarSom();
-        prepare(); 
     }
     
     public Mapa(boolean ligado, int contadorVida, String nome, int numPeidinVidas, int numBuffanVidas){
@@ -52,30 +57,38 @@ public class Mapa extends World
         prepare();
     }
     
-    //Setters
-    public void setBuffanVidas(int valor){
-        this.valorBuffan = valor;
+    public Mapa(boolean ligado, int numPeidinVidas, int numBuffanVidas){
+        super(largura,altura,1);
+        this.ligado = ligado;
+        valorPeidin = numPeidinVidas;
+        valorBuffan = numBuffanVidas;
+        ligarSom();
+        prepare(); 
     }
 
-    public void setPeidinVidas(int valor){
-        this.valorPeidin = valor;
+    private Bonus sortearBonus(int valor){
+        if(valor == 1){
+            return new Vida();
+        }else if(valor == 2){
+            return new Velocidade();
+        }
+        return new Forca();
     }
-
-    //Getters
-    public boolean getLigado(){
-        return this.ligado;
+    
+    
+    public void ligarSom(){
+        if(this.ligado){
+            buffan.setLigado(this.ligado);
+            peidin.setLigado(this.ligado);
+            //buffan.setContador(this.contador);
+           // peidin.setContador(this.contador);
+            this.som = new GreenfootSound("musicamapa.mp3");
+            this.som.play();
+        } 
     }
-
-    public GreenfootSound getSom(){
-        return this.som;
-    }
-
-    public Personagens getBuffa(){
-        return this.buffan;
-    }
-
-    public Personagens getPeidin(){
-        return this.peidin;
+    //Vidas
+    public Contador getContador(){
+        return this.contador;
     }
     
     public int getBuffanVidas(){
@@ -85,81 +98,110 @@ public class Mapa extends World
     public int getPeidinVidas(){
         return this.valorPeidin;
     }
-    
-    public Contador getContador(){
-        return this.contador;
+
+    public void setBuffanVidas(int valor){
+        this.valorBuffan = valor;
     }
 
-    public void ligarSom(){
-        if(this.ligado){
-            buffan.setLigado(this.ligado);
-            peidin.setLigado(this.ligado);
-            buffan.setContador(this.contador);
-            peidin.setContador(this.contador);
-            this.som = new GreenfootSound("musicamapa.mp3");
-            this.som.setVolume(70);
-            this.som.play();
+    public void setPeidinVidas(int valor){
+        this.valorPeidin = valor;
+    }
+
+    public boolean getLigado(){
+        return this.ligado;
+    }
+
+    public GreenfootSound getSom(){
+        return this.som;
+    }
+    
+    public Personagens getBuffa(){
+        return this.buffan;
+    }
+    
+    public Personagens getPeidin(){
+        return this.peidin;
+    }
+
+    //Toda vez que o jogo for inicado, teremos um ator na posição 388 , 43 do mapa.
+    private void prepare()
+    {              
+        this.buffanVida1 = new BuffanVida();
+        this.buffanVida2 = new BuffanVida();
+        this.buffanVida3 = new BuffanVida();
+
+        this.peidinVida1 = new PeidinVida();
+        this.peidinVida2 = new PeidinVida();
+        this.peidinVida3 = new PeidinVida();
+        
+        addObject(buffan, 30, 30);
+        addObject(peidin, largura-30, altura-80);
+        addObject(contador, 218, 427);
+        setPaintOrder(Borda.class, Privada.class, Bosta.class);
+        //Vidas buffan
+        if( valorBuffan == 3){
+            addObject(buffanVida1, 70, 430);
+            addObject(buffanVida2, 90, 430);
+            addObject(buffanVida3, 110, 430);
+        }
+
+        if(valorBuffan == 2) {
+            addObject(buffanVida1, 70, 430);
+            addObject(buffanVida2, 90, 430);
+            buffanVida3.setImage("morto.png");
+            addObject(buffanVida3, 110, 430);
         } 
-    }
-    
-   private Bonus sortearBonus(int valor){
-        if(valor == 1){
-            return vida;
-        }else if(valor == 2){
-            return new Velocidade();
+
+        if(valorBuffan == 1){
+            addObject(buffanVida1, 70, 430);
+            buffanVida2.setImage("morto.png");
+            buffanVida3.setImage("morto.png");
+            addObject(buffanVida3, 110, 430);
+            addObject(buffanVida2, 90, 430);
         }
-        return new Forca();
-    }
 
-
-    private void criarVidasDeBuffan(){
-        buffanVidas = new ArrayList<BuffanVida>();
-        for(int i=0;i<4;i++){
-            buffanVidas.add(new BuffanVida());
+        if(valorBuffan == 0){
+            buffanVida1.setImage("morto.png");
+            buffanVida2.setImage("morto.png");
+            buffanVida3.setImage("morto.png");
+            addObject(buffanVida1, 70, 430);
+            addObject(buffanVida3, 110, 430);
+            addObject(buffanVida2, 90, 430);
         }
-    }
-    
-    private void criarVidasPeidin(){
-        peidinVidas = new ArrayList<PeidinVida>();
-        for(int i=0;i<4;i++){
-            peidinVidas.add(new PeidinVida());
+
+        //Vida Peidin
+        if( valorPeidin == 3){
+            addObject(peidinVida1, 330, 430);
+            addObject(peidinVida2, 350, 430);
+            addObject(peidinVida3, 370, 430);
         }
-    }
-    
-    private void criarBonus(){
-        //Cria os bonus aleatoriamente no mapa.
-        for(int i = 0; i < 6; i++){
-            //Vai sortear o bonus.
-            int bonusDaVez = Greenfoot.getRandomNumber(6); 
 
-            //Pega todos os RoloDireitas do mapa.
-            List listaDeRoloDireitas = getObjects(RoloDireita.class);
-            List listaDeRoloDireitas02 =  getObjects(RoloEsquerda.class);
+        if(valorPeidin == 2) {
+            addObject(peidinVida1, 330, 430);
+            addObject(peidinVida2, 350, 430);
+            peidinVida3.setImage("morto.png");
+            addObject(peidinVida3, 370, 430);
+        } 
 
-            //Gera numeros aleatórios, de acordo com o numero de RoloDireitas no mapa.
-            int numeroRandomRoloDireita = Greenfoot.getRandomNumber(listaDeRoloDireitas.size());
-            int numeroRandomRoloEsquerda = Greenfoot.getRandomNumber(listaDeRoloDireitas02.size());
-
-            //Procura os RoloDireitas randomicamente.
-            RoloDireita RoloDireita = (RoloDireita) listaDeRoloDireitas.get(numeroRandomRoloDireita);
-            RoloEsquerda RoloEsquerda = (RoloEsquerda) listaDeRoloDireitas02.get(numeroRandomRoloEsquerda);
-
-            addObject(sortearBonus(bonusDaVez), RoloDireita.getX()-1 , RoloDireita.getY());                        
-            addObject(sortearBonus(bonusDaVez), RoloEsquerda.getX()-1 , RoloEsquerda.getY());
+        if(valorPeidin == 1){
+            addObject(peidinVida1, 330, 430);
+            peidinVida2.setImage("morto.png");
+            peidinVida3.setImage("morto.png");
+            addObject(peidinVida3, 350, 430);
+            addObject(peidinVida2, 370, 430);
         }
-    }
-    
-    private void alocarPrivda(){
-        for (x=50; x<450; x+=50)
-        {
-            for (y = 50; y<380; y+=50){
-                addObject(new Privada(), x, y);        
-            }
-        }  
-    }
-    
-    private void alocarBorda(){
-          // Parede SUPERIOR
+
+        if(valorPeidin == 0){
+            peidinVida1.setImage("morto.png");
+            peidinVida2.setImage("morto.png");
+            peidinVida3.setImage("morto.png");
+            addObject(peidinVida1, 70, 430);
+            addObject(peidinVida2, 110, 430);
+            addObject(peidinVida3, 90, 430);
+        }
+
+
+        // Parede SUPERIOR
         for (x=0; x<450; x+=18)
         {
             y = 0;
@@ -185,138 +227,73 @@ public class Mapa extends World
         {
             y = 0;
             addObject(new Borda(), y, x);
+        }   
+
+        // Linhas
+        for (x=50; x<450; x+=50)
+        {
+            for (y = 50; y<380; y+=50){
+                addObject(new Privada(), x, y);        
+            }
         }  
-    }
-    
-    private void alocarRolos(){
+
+        /* -----------------------------------------------------------------------------------------
+         * Rolos 
+        ----------------------------------------------------------------------------------------- */
         for (x=75; x<425; x+=50)
         {
             for (y = 50; y<375; y+=50){
-                addObject(new RoloDireita(), x, y); 
+                addObject(new Rolo(), x, y); 
             }
         }
 
         for (x=75; x<450; x+=100)
         {
             for (y = 25; y<400; y+=100){
-                addObject(new RoloEsquerda(), x, y); 
+                addObject(new Rolo02(), x, y); 
             }
         }
         for (x=75; x<450; x+=100){
             y = 375;
-            addObject(new RoloDireita(), x, y);
+            addObject(new Rolo(), x, y);
         }
 
         for (x=25; x<450; x+=100)
         {
             for (y = 75; y<300; y+=100){
-                addObject(new RoloEsquerda(), x, y); 
+                addObject(new Rolo02(), x, y); 
             }
         } 
 
         for (x=25; x<450; x+=100){
             for (y = 125; y<400; y+=200){
-                addObject(new RoloDireita(), x, y); 
+                addObject(new Rolo(), x, y); 
             }
         }
-    }
-    
-    private void alocarVidaBuffan(){
-        criarVidasDeBuffan();
-        if(valorBuffan == 4){
-            addObject(buffanVidas.get(0), 70, 430);
-            addObject(buffanVidas.get(1), 90, 430);
-            addObject(buffanVidas.get(2), 110, 430);
-            addObject(buffanVidas.get(3), 130, 430);
-        }
-
-        if(valorBuffan == 3){
-            addObject(buffanVidas.get(0), 70, 430);
-            addObject(buffanVidas.get(1), 90, 430);
-            addObject(buffanVidas.get(2), 110, 430);
-        }
-
-        if(valorBuffan == 2) {
-            addObject(buffanVidas.get(0), 70, 430);
-            addObject(buffanVidas.get(1), 90, 430);
-            buffanVidas.get(2).setImage("morto.png");
-            addObject(buffanVidas.get(2), 110, 430);
-        } 
-
-        if(valorBuffan == 1){
-            addObject(buffanVidas.get(0), 70, 430);
-            buffanVidas.get(1).setImage("morto.png");
-            buffanVidas.get(2).setImage("morto.png");
-            addObject(buffanVidas.get(1), 110, 430);
-            addObject(buffanVidas.get(2), 90, 430);
-        }
-
-        if(valorBuffan == 0){
-            buffanVidas.get(0).setImage("morto.png");
-            buffanVidas.get(1).setImage("morto.png");
-            buffanVidas.get(2).setImage("morto.png");
-            addObject(buffanVidas.get(0), 70, 430);
-            addObject(buffanVidas.get(1), 90, 430);
-            addObject(buffanVidas.get(2), 110, 430);
-        }
-    }
-    
-    private void alocarVidaPeidin(){
-        criarVidasPeidin();
-        if( valorPeidin == 4){
-            addObject(peidinVidas.get(0), 310, 430);
-            addObject(peidinVidas.get(1), 330, 430);
-            addObject(peidinVidas.get(2), 350, 430);
-            addObject(peidinVidas.get(3), 370, 430);
-        }
-
-        if( valorPeidin == 3){
-            addObject(peidinVidas.get(0), 330, 430);
-            addObject(peidinVidas.get(1), 350, 430);
-            addObject(peidinVidas.get(2), 370, 430);
-        }
-
-        if(valorPeidin == 2) {
-            peidinVidas.get(0).setImage("morto.png");
-            addObject(peidinVidas.get(0), 330, 430);
-            addObject(peidinVidas.get(1), 350, 430);
-            addObject(peidinVidas.get(2), 370, 430);
-        } 
-
-        if(valorPeidin == 1){
-            peidinVidas.get(0).setImage("morto.png");
-            addObject(peidinVidas.get(0), 330, 430);
-            peidinVidas.get(1).setImage("morto.png");
-            addObject(peidinVidas.get(1), 350, 430);
-            addObject(peidinVidas.get(2), 370, 430);
-        }
-
-        if(valorPeidin == 0){
-            peidinVidas.get(0).setImage("morto.png");
-            addObject(peidinVidas.get(0), 330, 430);
-            peidinVidas.get(1).setImage("morto.png");
-            addObject(peidinVidas.get(1), 350, 430);
-            peidinVidas.get(2).setImage("morto.png");
-            addObject(peidinVidas.get(2), 370, 430);
-        }
-    }
-    
-    private void alocarPersonagens(){
-       addObject(buffan, 30, 30);
-       addObject(peidin, largura-30, altura-80);
-       addObject(contador, 218, 427);
-       setPaintOrder(Borda.class, Privada.class, Bomba.class, RoloDireita.class, RoloEsquerda.class, Bonus.class);
-    }
-    
-    private void prepare()
-    {              
-       alocarPersonagens();
-       alocarVidaBuffan();
-       alocarVidaPeidin();
-       alocarBorda(); 
-       alocarPrivda();
-       alocarRolos();     
-       criarBonus();
+        
+        //Cria os bonus aleatoriamente no mapa.
+        for(int i = 0; i < 10; i++){
+            //Vai sortear o bonus.
+            int bonusDaVez = Greenfoot.getRandomNumber(3); 
+            
+            //Pega todos os rolos do mapa.
+            List listaDeRolos = getObjects(Rolo.class);
+            List listaDeRolos02 =  getObjects(Rolo02.class);
+            
+            //Gera numeros aleatórios, de acordo com o numero de rolos no mapa.
+            int numeroRandomRolo = Greenfoot.getRandomNumber(listaDeRolos.size());
+            int numeroRandomRolo02 = Greenfoot.getRandomNumber(listaDeRolos02.size());
+            
+            //Procura os rolos randomicamente.
+            Rolo rolo = (Rolo) listaDeRolos.get(numeroRandomRolo);
+            Rolo02 rolo02 = (Rolo02) listaDeRolos02.get(numeroRandomRolo02);
+            
+            setPaintOrder(Rolo.class);
+            addObject(sortearBonus(bonusDaVez), rolo.getX() , rolo.getY());
+            
+            setPaintOrder(Rolo02.class);
+            addObject(sortearBonus(bonusDaVez), rolo02.getX() , rolo02.getY());
+        }   
     }   
 }
 

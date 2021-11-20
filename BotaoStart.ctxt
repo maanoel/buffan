@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=
+comment0.target=BotaoStart()
+comment1.params=somOn
+comment1.target=void\ setSomOn(boolean)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=som
+comment3.target=void\ setSom(greenfoot.GreenfootSound)
+comment4.params=
+comment4.target=greenfoot.GreenfootSound\ getSom()
+comment5.params=ligada
+comment5.target=void\ setLigada(boolean)
+comment6.params=
+comment6.target=boolean\ getLigada()
+comment7.params=off
+comment7.target=void\ setOff(boolean)
+comment8.params=
+comment8.target=boolean\ getOff()
+comment9.params=
+comment9.target=java.lang.String\ toString()
+numComments=10

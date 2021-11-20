@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.params=m
+comment0.target=Contador(Mapa)
+comment1.params=
+comment1.target=int\ getCurrent()
+comment10.params=e
+comment10.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment2.params=current
+comment2.target=void\ setCurrent(int)
+comment3.params=
+comment3.target=int\ getMinuto()
+comment4.params=m
+comment4.target=void\ setMinuto(int)
+comment5.params=
+comment5.target=int\ getTempo()
+comment6.params=t
+comment6.target=void\ setTempo(int)
+comment7.params=
+comment7.target=void\ act()
+comment8.params=
+comment8.target=void\ mostra()
+comment9.params=
+comment9.target=void\ go()
+numComments=11
